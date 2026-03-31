@@ -1274,7 +1274,6 @@
     </div>
     <div class="carousel-controls">
       <button class="car-btn" id="carPrev" aria-label="Previous review">&#8592;</button>
-      <span class="car-count"><span id="carCurrent">1</span> / <span id="carTotal">3</span></span>
       <button class="car-btn" id="carNext" aria-label="Next review">&#8594;</button>
     </div>
   </div>
@@ -1497,8 +1496,6 @@
   (function() {
     const track = document.getElementById('carTrack');
     const dotsContainer = document.getElementById('carDots');
-    const currentEl = document.getElementById('carCurrent');
-    const totalEl = document.getElementById('carTotal');
     const prevBtn = document.getElementById('carPrev');
     const nextBtn = document.getElementById('carNext');
 
@@ -1506,9 +1503,6 @@
     let current = 0;
     let autoTimer;
 
-    totalEl.textContent = slides.length;
-
-    // Build dots
     slides.forEach((_, i) => {
       const dot = document.createElement('button');
       dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
@@ -1520,7 +1514,6 @@
     function goTo(idx) {
       current = (idx + slides.length) % slides.length;
       track.style.transform = 'translateX(-' + (current * 100) + '%)';
-      currentEl.textContent = current + 1;
       dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => {
         d.classList.toggle('active', i === current);
       });
