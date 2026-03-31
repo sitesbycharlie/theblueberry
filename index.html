@@ -223,8 +223,16 @@
     text-transform: uppercase; color: var(--blueberry); font-weight: 400;
   }
   .intro-img {
-    background: url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=80') center/cover no-repeat;
     min-height: 500px;
+    overflow: hidden;
+    position: relative;
+  }
+  .intro-img-inner {
+    position: absolute; inset: -15%;
+    background: url('our-story.jpg'), url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=80');
+    background-size: cover;
+    background-position: center;
+    will-change: transform;
   }
 
   /* DIVIDER */
@@ -339,17 +347,21 @@
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     grid-template-rows: 340px 280px;
-    gap: 4px;
+    gap: 3px;
   }
   .gallery-item {
     overflow: hidden; position: relative; background: var(--blueberry-deep);
   }
   .gallery-item img {
     width: 100%; height: 100%; object-fit: cover;
-    transition: transform 0.6s ease, opacity 0.4s;
-    opacity: 0.9;
+    transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.5s;
+    filter: brightness(0.92) saturate(1.05);
+    transform: scale(1.02);
   }
-  .gallery-item:hover img { transform: scale(1.05); opacity: 1; }
+  .gallery-item:hover img {
+    transform: scale(1.08);
+    filter: brightness(1) saturate(1.1);
+  }
   .gallery-item:nth-child(1) { grid-row: span 2; }
   .gallery-caption {
     position: absolute; bottom: 1.2rem; left: 1.2rem;
@@ -395,42 +407,43 @@
   .car-btn {
     background: none; border: 0.5px solid rgba(59,79,122,0.25);
     width: 40px; height: 40px; cursor: pointer; font-size: 1rem;
-    color: var(--blueberry-deep); transition: background 0.2s, color 0.2s;
+    color: var(--blueberry-deep); transition: background 0.25s, color 0.25s, transform 0.2s;
     display: flex; align-items: center; justify-content: center;
   }
-  .car-btn:hover { background: var(--blueberry); color: white; border-color: var(--blueberry); }
+  .car-btn:hover { background: var(--blueberry); color: white; border-color: var(--blueberry); transform: scale(1.05); }
   .car-count { font-size: 0.72rem; letter-spacing: 0.15em; color: var(--muted); min-width: 40px; text-align: center; }
 
   .carousel-outer { overflow: hidden; }
   .carousel-track {
-    display: flex; transition: transform 0.55s cubic-bezier(0.4,0,0.2,1);
+    display: flex; transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .carousel-slide {
     min-width: 100%; padding: 0 0.5rem;
   }
   .review-card.featured {
-    background: var(--cream); border: 0.5px solid rgba(59,79,122,0.12);
+    background: var(--cream); border: 0.5px solid rgba(59,79,122,0.1);
     padding: 4rem 5rem; max-width: 820px; margin: 0 auto;
     text-align: center;
+    transition: box-shadow 0.3s;
   }
   .review-text {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.25rem, 2.5vw, 1.7rem); font-weight: 300; line-height: 1.7;
+    font-size: clamp(1.25rem, 2.5vw, 1.7rem); font-weight: 300; line-height: 1.75;
     color: var(--blueberry-deep); font-style: italic; margin-bottom: 2rem;
   }
   .review-author {
-    font-size: 0.68rem; letter-spacing: 0.28em; text-transform: uppercase;
+    font-size: 0.65rem; letter-spacing: 0.32em; text-transform: uppercase;
     color: var(--blueberry); font-weight: 500;
   }
   .carousel-dots {
-    display: flex; gap: 8px; justify-content: center; margin-top: 2.5rem;
+    display: flex; gap: 10px; justify-content: center; margin-top: 2.5rem; align-items: center;
   }
   .carousel-dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: rgba(59,79,122,0.2); border: none; cursor: pointer; padding: 0;
-    transition: background 0.3s, transform 0.3s;
+    width: 5px; height: 5px; border-radius: 50%;
+    background: rgba(59,79,122,0.18); border: none; cursor: pointer; padding: 0;
+    transition: background 0.35s, transform 0.35s, width 0.35s;
   }
-  .carousel-dot.active { background: var(--blueberry); transform: scale(1.4); }
+  .carousel-dot.active { background: var(--blueberry); transform: scale(1.5); }
 
   /* LOCATION */
   .location-section {
@@ -461,25 +474,30 @@
     font-size: 0.82rem; color: var(--blueberry-deep); font-weight: 400;
   }
   .directions-btn {
-    display: inline-block; margin-top: 1.8rem;
+    display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.8rem;
     font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
     color: var(--blueberry); text-decoration: none;
     border: 0.5px solid rgba(59,79,122,0.3); padding: 0.7rem 1.4rem;
-    transition: background 0.2s, color 0.2s;
+    transition: background 0.25s, color 0.25s, transform 0.2s;
     font-family: 'Jost', sans-serif; font-weight: 400;
   }
-  .directions-btn:hover { background: var(--blueberry); color: white; }
+  .directions-btn:hover { background: var(--blueberry); color: white; transform: translateY(-2px); }
   .map-placeholder {
-    background: url('map-bg.jpg') center/cover no-repeat;
     position: relative; min-height: 500px; display: block; text-decoration: none;
-    cursor: pointer;
+    cursor: pointer; overflow: hidden;
+  }
+  .map-bg-inner {
+    position: absolute; inset: -15%;
+    background: url('map-bg.jpg') center/cover no-repeat;
+    will-change: transform;
   }
   .map-overlay {
     position: absolute; inset: 0;
-    background: rgba(30,46,80,0.3);
+    background: transparent;
     transition: background 0.3s;
+    z-index: 1;
   }
-  .map-placeholder:hover .map-overlay { background: rgba(30,46,80,0.45); }
+  .map-placeholder:hover .map-overlay { background: rgba(30,46,80,0.15); }
   .map-label {
     position: absolute; bottom: 2rem; left: 2rem;
     background: white; padding: 1rem 1.5rem;
@@ -641,7 +659,7 @@
     <p>We seat 60 inside and welcome you outside on the pavement tables when the Donegal weather obliges.</p>
     <p class="since">Family owned & run · Castle Street, Donegal Town · F94 AH75 · Est. 1993</p>
   </div>
-  <div class="intro-img" style="background-image: url('our-story.jpg'), url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=80');"></div>
+  <div class="intro-img" id="introImg"><div class="intro-img-inner" id="introImgInner"></div></div>
 </section>
 
 <!-- MARQUEE -->
@@ -1349,9 +1367,10 @@
       </a>
     </div>
   </div>
-  <a href="https://maps.google.com/?q=The+Blueberry+Tea+Room,+Castle+Street,+Donegal+Town,+F94+AH75" target="_blank" class="map-placeholder" aria-label="Open in Google Maps">
+  <a href="https://maps.google.com/?q=The+Blueberry+Tea+Room,+Castle+Street,+Donegal+Town,+F94+AH75" target="_blank" class="map-placeholder" id="mapPlaceholder" aria-label="Open in Google Maps">
+    <div class="map-bg-inner" id="mapBgInner"></div>
     <div class="map-overlay"></div>
-    <div class="map-label">
+    <div class="map-label" style="z-index:2;">
       <strong>The Blueberry Tearooms</strong>
       <span>Castle Street, Donegal Town · F94 AH75</span>
       <span class="map-cta">Click to open in Google Maps ↗</span>
@@ -1413,7 +1432,45 @@
     heroBg.style.transform = 'scale(' + scale + ')';
   }
   updateHeroParallax();
-  window.addEventListener('scroll', updateHeroParallax, { passive: true });
+
+  // About image parallax
+  const introImgInner = document.getElementById('introImgInner');
+  const introImg = document.getElementById('introImg');
+
+  // Map parallax
+  const mapBgInner = document.getElementById('mapBgInner');
+  const mapPlaceholder = document.getElementById('mapPlaceholder');
+
+  function updateParallax() {
+    // Hero
+    updateHeroParallax();
+
+    // About image
+    if (introImgInner && introImg) {
+      const rect = introImg.getBoundingClientRect();
+      const windowH = window.innerHeight;
+      if (rect.bottom > 0 && rect.top < windowH) {
+        const progress = (windowH - rect.top) / (windowH + rect.height);
+        const offset = (progress - 0.5) * 60;
+        introImgInner.style.transform = 'translateY(' + offset + 'px)';
+      }
+    }
+
+    // Map
+    if (mapBgInner && mapPlaceholder) {
+      const rect = mapPlaceholder.getBoundingClientRect();
+      const windowH = window.innerHeight;
+      if (rect.bottom > 0 && rect.top < windowH) {
+        const progress = (windowH - rect.top) / (windowH + rect.height);
+        const offset = (progress - 0.5) * 60;
+        mapBgInner.style.transform = 'translateY(' + offset + 'px)';
+      }
+    }
+  }
+
+  updateParallax();
+  window.addEventListener('scroll', updateParallax, { passive: true });
+  window.addEventListener('resize', updateParallax, { passive: true });
 
   // Navbar scroll
   const nav = document.getElementById('nav');
