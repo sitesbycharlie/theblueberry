@@ -363,11 +363,6 @@
     filter: brightness(1) saturate(1.1);
   }
   .gallery-item:nth-child(1) { grid-row: span 2; }
-  .gallery-caption {
-    position: absolute; bottom: 1.2rem; left: 1.2rem;
-    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: rgba(255,255,255,0.6);
-  }
 
   /* INFO STRIP */
   .info-strip {
@@ -556,12 +551,7 @@
     color: var(--blueberry-deep); line-height: 1;
   }
 
-  /* SCROLL PROGRESS BAR */
-  .scroll-progress {
-    position: fixed; top: 0; left: 0; height: 2px; z-index: 999;
-    background: var(--blueberry); width: 0%;
-    transition: width 0.1s linear;
-  }
+  /* SCROLL PROGRESS BAR — removed */
 
   /* BACK TO TOP */
   .back-to-top {
@@ -575,34 +565,6 @@
   .back-to-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
   .back-to-top:hover { background: var(--blueberry); }
   .back-to-top svg { color: white; }
-
-  /* NAV ACTIVE LINKS */
-  .nav-links a.nav-active { color: rgba(255,255,255,0.55) !important; }
-  nav.scrolled .nav-links a.nav-active { color: var(--blueberry) !important; font-weight: 500; }
-
-  /* FADE SLIDE UP — scroll reveal */
-  .reveal {
-    opacity: 0; transform: translateY(32px);
-    transition: opacity 0.75s ease, transform 0.75s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.3s; }
-  .reveal-delay-4 { transition-delay: 0.4s; }
-
-  /* GALLERY STAGGER */
-  .gallery-item {
-    opacity: 0; transform: scale(0.97);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .gallery-item.visible { opacity: 1; transform: scale(1); }
-
-  /* COUNT-UP */
-  .count-up { display: inline-block; }
-
-  /* MARQUEE PARALLAX wrapper */
-  .marquee-strip { position: relative; overflow: hidden; }
   .accordion-item { border-bottom: 0.5px solid rgba(59,79,122,0.12); }
   .accordion-trigger {
     width: 100%; display: flex; justify-content: space-between; align-items: center;
@@ -710,7 +672,6 @@
 </head>
 <body>
 
-<div class="scroll-progress" id="scrollProgress"></div>
 <button class="back-to-top" id="backToTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M8 13V3M3 8l5-5 5 5" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1417,24 +1378,25 @@
   </div>
 </section>
 
-  <div class="info-strip">
-    <div class="info-cell reveal">
-      <p class="cell-label">Opening Hours</p>
-      <h3>Monday – Saturday</h3>
-      <p>9:00am – 6:00pm<br>Closed Sundays</p>
-    </div>
-    <div class="info-cell reveal reveal-delay-1">
-      <p class="cell-label">Find Us</p>
-      <h3>Castle Street<br>Donegal Town</h3>
-      <p>F94 AH75 · Steps from Donegal Castle<br>Just off The Diamond<br>Outdoor pavement seating</p>
-      <a href="https://maps.google.com/?q=The+Blueberry+Tea+Room,+Castle+Street,+Donegal+Town,+F94+AH75" target="_blank" style="display:inline-block; margin-top:1rem; font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:#B8C8E8; text-decoration:none; border-bottom: 0.5px solid rgba(184,200,232,0.35); padding-bottom:2px;">Get Directions ↗</a>
-    </div>
-    <div class="info-cell reveal reveal-delay-2">
-      <p class="cell-label">Reservations & Enquiries</p>
-      <h3>Get in Touch</h3>
-      <p>Phone: <a href="tel:+353749722933">074 972 2933</a><br>Walk-ins always welcome<br>Est. <span class="count-up" data-target="1993" data-suffix="">1993</span> · <span class="count-up" data-target="60" data-suffix=" seats">60 seats</span></p>
-    </div>
+<!-- INFO STRIP -->
+<div class="info-strip">
+  <div class="info-cell">
+    <p class="cell-label">Opening Hours</p>
+    <h3>Monday – Saturday</h3>
+    <p>9:00am – 6:00pm<br>Closed Sundays</p>
   </div>
+  <div class="info-cell">
+    <p class="cell-label">Find Us</p>
+    <h3>Castle Street<br>Donegal Town</h3>
+    <p>F94 AH75 · Steps from Donegal Castle<br>Just off The Diamond<br>Outdoor pavement seating</p>
+    <a href="https://maps.google.com/?q=The+Blueberry+Tea+Room,+Castle+Street,+Donegal+Town,+F94+AH75" target="_blank" style="display:inline-block; margin-top:1rem; font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:#B8C8E8; text-decoration:none; border-bottom: 0.5px solid rgba(184,200,232,0.35); padding-bottom:2px;">Get Directions ↗</a>
+  </div>
+  <div class="info-cell">
+    <p class="cell-label">Reservations & Enquiries</p>
+    <h3>Get in Touch</h3>
+    <p>Phone: <a href="tel:+353749722933">074 972 2933</a><br>Walk-ins always welcome<br>Children's menu available</p>
+  </div>
+</div>
 
 <!-- TESTIMONIALS CAROUSEL -->
 <section class="testimonials" id="reviews">
@@ -1753,108 +1715,12 @@
     resetAuto();
   })();
 
-  // ── SCROLL PROGRESS BAR ──
-  const progressBar = document.getElementById('scrollProgress');
+  // ── BACK TO TOP ──
   const backToTop = document.getElementById('backToTop');
-
-  // ── ACTIVE NAV ──
-  const navSections = ['about','menu','gallery','reviews','visit'].map(id => document.getElementById(id)).filter(Boolean);
-  const navLinks = document.querySelectorAll('.nav-links a');
-
-  function updateActiveNav() {
-    const scrollY = window.scrollY + window.innerHeight * 0.35;
-    let current = '';
-    navSections.forEach(section => {
-      if (section && scrollY >= section.offsetTop) current = section.id;
-    });
-    navLinks.forEach(link => {
-      const href = link.getAttribute('href').replace('#','');
-      link.classList.toggle('nav-active', href === current);
-    });
-  }
-
-  // ── MARQUEE PARALLAX ──
-  const marqueeInner = document.querySelector('.marquee-inner');
-
-  function updateMarqueeParallax() {
-    if (!marqueeInner) return;
-    const strip = marqueeInner.parentElement.parentElement;
-    const rect = strip.getBoundingClientRect();
-    const windowH = window.innerHeight;
-    if (rect.bottom > 0 && rect.top < windowH) {
-      const offset = ((windowH - rect.top) / windowH - 0.5) * 30;
-      marqueeInner.style.transform = 'translateX(calc(-50% + ' + offset + 'px))';
-    }
-  }
-
-  // ── SCROLL REVEAL (fade + slide) ──
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        revealObserver.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  // Add reveal class to sections
-  document.querySelectorAll(
-    '.intro-text, .location-text, .testimonials .section-header, .menu-section .section-header, .footer-brand, .footer-col, .review-card'
-  ).forEach((el, i) => {
-    el.classList.add('reveal');
-    if (i % 4 === 1) el.classList.add('reveal-delay-1');
-    if (i % 4 === 2) el.classList.add('reveal-delay-2');
-    if (i % 4 === 3) el.classList.add('reveal-delay-3');
-    revealObserver.observe(el);
-  });
-
-  // ── GALLERY STAGGER ──
-  const galleryItems = document.querySelectorAll('.gallery-item');
-  const galleryObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const idx = Array.from(galleryItems).indexOf(e.target);
-        setTimeout(() => e.target.classList.add('visible'), idx * 100);
-        galleryObserver.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.05 });
-  galleryItems.forEach(item => galleryObserver.observe(item));
-
-  // ── COUNT-UP ──
-  function animateCount(el) {
-    const target = parseInt(el.dataset.target);
-    const suffix = el.dataset.suffix || '';
-    const duration = 1200;
-    const start = performance.now();
-    const startVal = target > 100 ? target - 60 : 0;
-    function step(now) {
-      const progress = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.round(startVal + (target - startVal) * eased) + suffix;
-      if (progress < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-
-  const countObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        animateCount(e.target);
-        countObserver.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.5 });
-  document.querySelectorAll('.count-up').forEach(el => countObserver.observe(el));
 
   // ── UNIFIED SCROLL HANDLER ──
   function onScroll() {
     const scrollY = window.scrollY;
-    const docH = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = (scrollY / docH) * 100;
-
-    // Progress bar
-    if (progressBar) progressBar.style.width = progress + '%';
 
     // Back to top
     if (backToTop) backToTop.classList.toggle('visible', scrollY > 600);
@@ -1862,12 +1728,8 @@
     // Nav scrolled
     nav.classList.toggle('scrolled', scrollY > 60);
 
-    // Active nav
-    updateActiveNav();
-
-    // Parallax (hero, about, map, marquee)
+    // Parallax
     updateParallax();
-    updateMarqueeParallax();
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
