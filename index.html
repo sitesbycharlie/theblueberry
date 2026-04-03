@@ -707,6 +707,11 @@
     color: var(--blueberry-deep); font-family: 'Jost', sans-serif; font-weight: 500;
     text-align: left; transition: color 0.2s;
   }
+  @media (min-width: 901px) {
+    .accordion-trigger { padding: 1.5rem 0; font-size: 0.75rem; }
+    .accordion-body-inner { padding: 0.5rem 0 2rem; }
+    .menu-accordion { max-width: 100%; }
+  }
   .accordion-trigger:hover { color: var(--blueberry); }
   .accordion-trigger.active { color: var(--blueberry); }
   .accordion-chevron {
@@ -745,9 +750,12 @@
     .info-strip { grid-template-columns: 1fr; }
     .info-cell { border-right: none; border-bottom: 0.5px solid rgba(255,255,255,0.08); padding: 3rem 1.5rem; }
     .testimonials { padding: 4rem 1.5rem; }
-    .brian-section { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 3rem; }
-    .brian-video-wrap { max-width: 260px; order: -1; }
-    .brian-text { order: 1; }
+    .brian-section { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .brian-text h2 { order: 1; margin-bottom: 1.5rem; width: 100%; }
+    .brian-video-wrap { order: 2; max-width: 260px; margin: 0 auto 2rem; }
+    .brian-text { order: 3; display: contents; }
+    .brian-text p { order: 3; width: 100%; text-align: left; }
+    .brian-text .brian-credit { order: 3; width: 100%; text-align: left; }
     .testimonials .section-header { margin-bottom: 2rem; }
     .review-card.featured { padding: 2.5rem 1.8rem; }
     .location-section { grid-template-columns: 1fr; }
@@ -1548,7 +1556,6 @@
       playsinline
       controls
       preload="metadata"
-      poster=""
     ></video>
   </div>
 </section>
@@ -1789,34 +1796,18 @@
     }
   }
 
-  // Switch between tabs and accordion based on screen width
+  // Switch between tabs and accordion — accordion on all screen sizes
   function handleMenuMode() {
-    const isMobile = window.innerWidth <= 900;
     const tabs = document.getElementById('menuTabs');
     const accordion = document.getElementById('menuAccordion');
     const panels = document.querySelectorAll('.menu-panel');
-    if (isMobile) {
-      tabs.style.display = 'none';
-      accordion.style.display = 'block';
-      panels.forEach(p => p.style.display = 'none');
-      initAccordion();
-    } else {
-      tabs.style.display = 'flex';
-      accordion.style.display = 'none';
-      panels.forEach(p => p.style.display = '');
-      const activeTab = document.querySelector('.menu-tab.active');
-      if (activeTab) {
-        const id = activeTab.getAttribute('onclick').match(/'(\w+)'/)[1];
-        document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
-        document.getElementById('tab-' + id).classList.add('active');
-      } else {
-        document.querySelector('.menu-tab').click();
-      }
-    }
+    tabs.style.display = 'none';
+    accordion.style.display = 'block';
+    panels.forEach(p => p.style.display = 'none');
+    initAccordion();
   }
 
   handleMenuMode();
-  window.addEventListener('resize', handleMenuMode, { passive: true });
 
   // Mobile menu
   const hamburger = document.getElementById('hamburger');
