@@ -56,6 +56,12 @@
   .nav-logo em { font-style: italic; color: #B8C8E8; }
   nav.scrolled .nav-logo { color: var(--blueberry-deep); }
   nav.scrolled .nav-logo em { color: var(--blueberry); }
+  @media (max-width: 900px) {
+    .nav-logo { color: white; text-shadow: 0 1px 6px rgba(0,0,0,0.4); }
+    .nav-logo em { color: #1a3a6e; text-shadow: 0 1px 6px rgba(0,0,0,0.4); }
+    nav.scrolled .nav-logo { color: var(--blueberry-deep); text-shadow: none; }
+    nav.scrolled .nav-logo em { color: var(--blueberry); text-shadow: none; }
+  }
   .nav-links {
     display: flex; gap: 2.5rem; list-style: none; align-items: center;
   }
@@ -1531,9 +1537,6 @@
       <p>Castle Street, Donegal Town, Co. Donegal, F94 AH75</p>
       <p style="margin-top:0.4rem;"><a href="tel:+353749722933" style="color: var(--blueberry); text-decoration:none;">+353 74 972 2933</a></p>
       <p style="margin-top: 1.5rem; font-size: 0.78rem; color: var(--muted);">Monday – Saturday: 9:00am – 6:00pm · Closed Sundays</p>
-      <a href="https://maps.google.com/?q=The+Blueberry+Tea+Room,+Castle+Street,+Donegal+Town,+F94+AH75" target="_blank" class="directions-btn">
-        Get Directions on Google Maps ↗
-      </a>
     </div>
   </div>
   <a href="https://maps.google.com/?q=The+Blueberry+Tea+Room,+Castle+Street,+Donegal+Town,+F94+AH75" target="_blank" class="map-placeholder" id="mapPlaceholder" aria-label="Open in Google Maps">
