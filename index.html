@@ -573,12 +573,52 @@
       flex-direction: row;
       animation: heroFadeUp 1s ease 0.4s both;
     }
-    .hero-scroll-cue {
-      display: flex;
+    .hero-scroll-cue { display: flex; }
+  }
+
+  /* MOBILE HERO — same clean look, buttons at bottom */
+  @media (max-width: 900px) {
+    .hero-logo-ring { display: none; }
+    .hero-eyebrow { display: none; }
+    .hero-sub { display: none; }
+    .hero-content {
+      position: absolute;
+      bottom: 3.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 3rem);
+      animation: heroFadeUp 1s ease 0.4s both;
+    }
+    .hero-ctas {
+      margin-top: 0;
+      flex-direction: column;
+      gap: 0.75rem;
+      width: 100%;
+    }
+    .btn-primary {
+      width: 100%; justify-content: center;
+      padding: 1.1rem 2rem; font-size: 0.78rem;
+      letter-spacing: 0.22em; max-width: 100%;
+      background: white; color: var(--blueberry-deep);
+      border: 2px solid white;
+    }
+    .btn-outline {
+      width: 100%; justify-content: center;
+      padding: 1.1rem 2rem; font-size: 0.78rem;
+      letter-spacing: 0.22em; max-width: 100%;
+      background: rgba(255,255,255,0.12);
+      border: 2px solid rgba(255,255,255,0.6);
+      backdrop-filter: blur(4px);
     }
   }
 
-  @keyframes heroFadeUp {
+  @media (max-width: 900px) {
+    .hero-bg {
+      background:
+        linear-gradient(to bottom, rgba(18,26,48,0.1) 0%, rgba(18,26,48,0.55) 100%),
+        url('hero.jpg') center 70%/cover no-repeat;
+    }
+  }
     from { opacity: 0; transform: translateY(16px); }
     to { opacity: 1; transform: translateY(0); }
   }
