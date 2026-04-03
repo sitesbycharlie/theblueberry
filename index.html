@@ -1807,6 +1807,17 @@
     initAccordion();
   }
 
+  // Auto-pause video when scrolled out of view
+  const brianVideo = document.querySelector('.brian-video-wrap video');
+  if (brianVideo) {
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) brianVideo.pause();
+      });
+    }, { threshold: 0.2 });
+    videoObserver.observe(brianVideo);
+  }
+
   handleMenuMode();
 
   // Mobile menu
