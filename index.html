@@ -795,7 +795,9 @@
       border-radius: 3px;
       grid-row: span 1 !important;
     }
-    .gallery-item:nth-child(1) { grid-row: span 1 !important; }
+    .gallery-item:nth-child(1) { grid-row: span 1 !important; order: 3; }
+    .gallery-item:nth-child(2) { order: 1; }
+    .gallery-item:nth-child(3) { order: 2; }
     .gallery-item img {
       transform: none !important;
     }
@@ -1629,14 +1631,14 @@
 </section>
 <section class="gallery-section" id="gallery">
   <div class="gallery-grid">
-    <div class="gallery-item">
-      <img src="gallery2.jpg" alt="The Blueberry Tearooms" loading="lazy">
+    <div class="gallery-item" id="gal-main">
+      <img src="gallery3.jpg" alt="The Blueberry Tearooms" loading="lazy">
     </div>
     <div class="gallery-item">
       <img src="gallery1.jpg" alt="The Blueberry Tearooms" loading="lazy">
     </div>
     <div class="gallery-item">
-      <img src="gallery3.jpg" alt="The Blueberry Tearooms" loading="lazy">
+      <img src="gallery2.jpg" alt="The Blueberry Tearooms" loading="lazy">
     </div>
     <div class="gallery-item">
       <img src="gallery4.jpg" alt="The Blueberry Tearooms" loading="lazy" style="object-position: center 20%;">
