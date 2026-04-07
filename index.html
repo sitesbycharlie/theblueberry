@@ -773,7 +773,47 @@
     object-fit: cover; display: block;
   }
 
-  /* ACCORDION MENU (mobile only) */
+  /* MOBILE SWIPE GALLERY */
+  @media (max-width: 900px) {
+    .gallery-section { position: relative; }
+    .gallery-grid {
+      display: flex !important;
+      overflow-x: scroll;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 6px;
+      padding: 0 1.5rem;
+      grid-template-columns: unset !important;
+      grid-template-rows: unset !important;
+      scrollbar-width: none;
+    }
+    .gallery-grid::-webkit-scrollbar { display: none; }
+    .gallery-item {
+      flex: 0 0 75vw;
+      height: 75vw;
+      scroll-snap-align: center;
+      border-radius: 3px;
+      grid-row: span 1 !important;
+    }
+    .gallery-item:nth-child(1) { grid-row: span 1 !important; }
+    .gallery-item img {
+      transform: none !important;
+    }
+    .gallery-swipe-hint {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 0 0;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-family: 'Jost', sans-serif;
+    }
+    .gallery-swipe-hint svg { color: var(--muted); }
+  }
+  .gallery-swipe-hint { display: none; }
   .accordion-trigger {
     width: 100%; display: flex; justify-content: space-between; align-items: center;
     padding: 1.3rem 0; background: none; border: none; cursor: pointer;
@@ -823,8 +863,7 @@
     .menu-panel.active { grid-template-columns: 1fr; }
     .menu-col { padding: 0; }
     .menu-col:last-child { border-left: none; border-top: 0.5px solid rgba(59,79,122,0.1); padding: 0; margin-top: 1.5rem; }
-    .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 220px 180px; }
-    .gallery-item:nth-child(1) { grid-row: span 1; }
+    .gallery-grid { grid-template-columns: 2fr 1fr 1fr; }
     .info-strip { grid-template-columns: 1fr; }
     .info-cell { border-right: none; border-bottom: 0.5px solid rgba(255,255,255,0.08); padding: 3rem 1.5rem; text-align: center; }
     .info-cell a { display: inline-block; }
@@ -869,7 +908,6 @@
     .intro-text h2 { font-size: 1.8rem; }
     .menu-section { padding: 3rem 1.2rem; }
     .item-info p { max-width: 100%; }
-    .gallery-grid { grid-template-columns: 1fr; grid-template-rows: repeat(5, 200px); }
     .gallery-item:nth-child(1) { grid-row: span 1; }
     .review-card.featured { padding: 2rem 1.2rem; }
     .review-text { font-size: clamp(1.1rem, 5vw, 1.4rem); }
@@ -901,7 +939,6 @@
     .hero-logo-img { width: 72px; height: 72px; }
     .hero-sub { font-size: 1.2rem; }
     .review-card.featured { padding: 1.5rem 1rem; }
-    .gallery-grid { grid-template-rows: repeat(5, 170px); }
   }
 </style>
 </head>
@@ -1608,6 +1645,15 @@
       <img src="gallery5.jpg" alt="The Blueberry Tearooms" loading="lazy">
     </div>
   </div>
+  <div class="gallery-swipe-hint" id="galleryHint">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>Swipe to explore</span>
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform:scaleX(-1)">
+      <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
 </section>
 
 <!-- INFO STRIP -->
@@ -1904,6 +1950,16 @@
       });
     }, { threshold: 0.2 });
     videoObserver.observe(brianVideo);
+  }
+
+  // Hide gallery swipe hint after first scroll
+  const galleryGrid = document.querySelector('.gallery-grid');
+  const galleryHint = document.getElementById('galleryHint');
+  if (galleryGrid && galleryHint) {
+    galleryGrid.addEventListener('scroll', () => {
+      galleryHint.style.opacity = '0';
+      galleryHint.style.transition = 'opacity 0.4s';
+    }, { passive: true, once: true });
   }
 
   handleMenuMode();
